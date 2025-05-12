@@ -3,14 +3,17 @@ import axios from "axios";
 import { useState } from "react";
 import { numbers } from "./data";
 import InputField from "./InputField";
-const url = "https://api.unsplash.com/search/photos/?per_page=20&orientation=landscape&client_id=JRD585-DlCVyhZXEWnT59R7TpjDtnlgRQEgav3_flcg";
+import Filters from "./Filters";
+const url = "https://api.unsplash.com/search/photos/?per_page=20&orientation=landscape";
 const QuerySearch = () => {
+  const api = "client_id=JRD585-DlCVyhZXEWnT59R7TpjDtnlgRQEgav3_flcg";
+  const [orientation, setOrientation] = useState("landscape");
   const [searchCategory, setSearchCategory] = useState("car");
   const [pageNumber, setPageNumber] = useState(1);
   const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["random-img", pageNumber, searchCategory],
+    queryKey: ["random-img", pageNumber, searchCategory, orientation],
     queryFn: async () => {
-      const result = await axios.get(`${url}&query=${searchCategory}&page=${pageNumber}`);
+      const result = await axios.get(`${url}&orientation=${orientation}&${api}&query=${searchCategory}&page=${pageNumber}`);
       return result.data;
     },
   });
@@ -22,14 +25,15 @@ const QuerySearch = () => {
   return (
     <main>
       <InputField searchCategory={searchCategory} setSearchCategory={setSearchCategory} />
+      <Filters orientation={orientation} setOrientation={setOrientation} />
       <section className="flex-gallery">
         {results.length < 1 ? (
           <div>No images found...</div>
         ) : (
           <>
-            <div className="grid-gallery">
+            <div className={orientation === "portrait" ? "grid-gallery grid-gallery-portrait" : " grid-gallery "}>
               {results.map((item) => {
-                return <img src={item.urls.small} className="img" key={item.id} />;
+                return <img src={item.urls.small} className={`img img-${orientation}`} key={item.id} />;
               })}
             </div>
             <div className="page-numbers-div">
