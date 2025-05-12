@@ -8,6 +8,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding: 2rem 4rem;
 }
 .grid-gallery {
   display: grid;
@@ -35,4 +36,23 @@
 }
 .number-page:hover {
   background-color: #f5f5f5;
+}
+
+/*Input*/
+.input-div {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.input {
+  font-size: 1.4rem;
+  padding: 0.2rem 0.4rem;
+}
+.btn {
+  font-size: 1.3rem;
+  background-color: transparent;
+  padding: 0.4rem;
+  border: 1px solid #333;
+  cursor: pointer;
 }
