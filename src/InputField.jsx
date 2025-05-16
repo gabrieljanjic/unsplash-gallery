@@ -5,9 +5,14 @@ const InputField = ({ searchCategory, setSearchCategory }) => {
   const handleInput = (e) => {
     setValue(e.target.value);
   };
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      setSearchCategory(value);
+    }
+  };
   return (
     <div className="input-div">
-      <input type="text" className="input" placeholder="Enter Category" onChange={handleInput} />
+      <input type="text" className="input" placeholder="Enter Category" onChange={handleInput} onKeyDown={handleKeyDown} />
       <button
         type="button"
         className="btn"

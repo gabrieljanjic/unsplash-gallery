@@ -3,6 +3,11 @@
   margin: 0;
   box-sizing: border-box;
 }
+/*Loading*/
+.loading {
+  margin: 0 auto;
+  margin-top: 10rem;
+}
 .flex-gallery {
   margin: 0 auto;
   max-width: 90rem;
@@ -40,17 +45,19 @@
   gap: 0.4rem;
 }
 .number-page {
-  font-size: 2rem;
-  padding: 0.4rem 1rem;
+  font-size: 1.4rem;
+  padding: 0.4rem 0.6rem;
   background: none;
   border: 1px solid #333;
-  border-radius: 50rem;
+  border-radius: 5px;
   cursor: pointer;
 }
 .number-page:hover {
   background-color: #f5f5f5;
 }
-
+.clicked-button {
+  background-color: #d6d6d6;
+}
 /*Input*/
 .input-div {
   margin-top: 3rem;

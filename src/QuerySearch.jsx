@@ -10,6 +10,7 @@ const QuerySearch = () => {
   const [orientation, setOrientation] = useState("landscape");
   const [searchCategory, setSearchCategory] = useState("car");
   const [pageNumber, setPageNumber] = useState(1);
+  const [activePage, setActivePage] = useState(1);
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["random-img", pageNumber, searchCategory, orientation],
     queryFn: async () => {
@@ -17,7 +18,7 @@ const QuerySearch = () => {
       return result.data;
     },
   });
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div className="loading">Loading...</div>;
   if (isError) return <div>Error: {error.message}</div>;
   const results = data.results;
 
@@ -39,7 +40,14 @@ const QuerySearch = () => {
             <div className="page-numbers-div">
               {numbers.map((number) => {
                 return (
-                  <button key={number.id} className="number-page" onClick={() => setPageNumber(number.value)}>
+                  <button
+                    key={number.id}
+                    className={`number-page ${activePage === number.value ? "clicked-button" : ""}`}
+                    onClick={() => {
+                      setPageNumber(number.value);
+                      setActivePage(number.value);
+                    }}
+                  >
                     {number.value}
                   </button>
                 );
